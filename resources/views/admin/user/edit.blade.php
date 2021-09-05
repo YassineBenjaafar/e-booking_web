@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
+
 <div class="container">
     <hr> <H2 class="text-muted" align="center">Modification</H2><hr> 
     <br><br>
@@ -21,7 +22,7 @@
         <tbody>
             <tr>
                 <td>{{ $user->id}}</td>
-                <td><input type="text" value="{{ $user->name}}" name="name" class="form-control"></td>
+                <td><input type="text" value="{{ $user->fullName}}" name="fullName" class="form-control"></td>
                 <td><input type="email" value="{{ $user->email}}" name="email" class="form-control"></td>
                 <td>{{ $user->email_verified_at}}</td>
                 <td>{{ $user->created_at}}</td>
@@ -46,7 +47,7 @@
             <hr>
     </div>
     </form>
-    <a href="{{ route('admin.users.index')}}" class="btn btn-secondary" style="float:left" ><i class="fas fa-arrow-left topicons"></i>Back</a>
+    <a href="{{ route('admin.users.index')}}" class="btn btn-secondary" style="float:left" ><i class="fa fa-arrow-left topicons"></i>Back</a>
 </div>
 
 @endsection

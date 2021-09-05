@@ -6,27 +6,17 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateParametresTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
     public function up()
     {
-        Schema::create('parametres', function (Blueprint $table) {
+        Schema::create('settings', function (Blueprint $table) {
             $table->id();
-            $table->boolean('hauteSaison');
+            $table->boolean('busySeason');
             $table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
-        Schema::dropIfExists('parametres');
+        Schema::dropIfExists('settings');
     }
 }

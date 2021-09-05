@@ -1,20 +1,20 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
 <div class="container">
-<hr> <H2 class="text-muted" align="center">Modification</H2><hr> 
+<hr> <H2 class="text-muted" align="center">Edit role <b>{{ $role->name}}</b></H2><hr> 
 <br><br>
-    <form action="{{ route('admin.roles.update',$role->id) }}" method="POST" enctype="multipart/form-data"  onSubmit="return confirm('Are you sure you wish to update ?');">
+    <form action="{{ route('admin.roles.update',$role->id) }}" method="POST" onSubmit="return confirm('Are you sure you wish to update ?');">
         @csrf
         @method('PUT')
       <table class="table table-striped">
         <thead>
             <tr>
-                <th width="10%">Id centre</th>
-                <th width="20%">Role name</th>
-                <th width="30%">Description</th>
-                <th width="15%">Created at</th>
-                <th width="15%">Updated at</th>
-                <th width="10%"></th>
+                <th>ID</th>
+                <th>Role name</th>
+                <th>Description</th>
+                <th>Created at</th>
+                <th>Updated at</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

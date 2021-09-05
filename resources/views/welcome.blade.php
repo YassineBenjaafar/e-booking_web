@@ -81,7 +81,7 @@
 
             <div class="content">
                 <div class="title m-b-md">
-                    Gesgtion Hebergement Admin Panel
+                    E-Booking admin Panel
                 </div>
 
                 <div class="links">

@@ -13,22 +13,23 @@ use Illuminate\Notifications\Notification;
 class TicketController extends Controller
 {
     public function postTicket(Request $request){
-     
-        $client = Auth::guard('client')->user();
-        $ticket = new Ticket();
+
         $request->validate([
-            'sujet' => 'required|max:30',
+            'subject' => 'required|max:30',
             'message' =>'required|max:255',
         ],
         [
-            'required' => 'le :attribute est vide .'
+            'required' => 'The :attribute is required!'
         ]);
 
-        $ticket->sujet = $request->sujet;
+        $client = Auth::guard('client')->user();
+        $ticket = new Ticket();
+
+        $ticket->subject = $request->subject;
         $ticket->message = $request->message;
         $ticket->client()->associate($client);
         $ticket->save();
-        return redirect()->back()->with('ticketSent','message envoyer avec success');  
+        return redirect()->back()->with('ticketSent','Message send successfully');  
 
     }
 
@@ -36,19 +37,19 @@ class TicketController extends Controller
     public function sendFeedback(Request $request)
     {
         $request->validate([
-            'commentaire' => 'required|max:255',
+            'commentary' => 'required|max:255',
             'note' =>'required|gt:0',
         ]);
         
         $this->readNotification($request->notifID);
         $feedback = new FeedBack();
         $feedback->note = $request->note;
-        $feedback->commentaire = $request->commentaire;
+        $feedback->commentary = $request->commentary;
         $feedback->save();
-        $reservation = Reservation::find($request->reservationID);
-        $reservation->feedback()->associate($feedback);
-        $reservation->update();
-        return redirect('/reservations')->with('response','merci pour votre feedback');
+        $booking = Reservation::find($request->bookingID);
+        $booking->feedback()->associate($feedback);
+        $booking->update();
+        return redirect('/bookings')->with('response','Thanks for your feedback');
     }
 
 
@@ -56,7 +57,7 @@ class TicketController extends Controller
         $notification = Auth::guard('client')->user()->notifications->where('id',$id);
         if($notification)
             $notification->markAsRead();
-        return redirect('/reservations');
+        return redirect('/bookings');
     }
 
     

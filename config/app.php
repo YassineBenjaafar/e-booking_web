@@ -162,7 +162,8 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         // pdf packages
-        Barryvdh\DomPDF\ServiceProvider::class,
+  	    Meneses\LaravelMpdf\LaravelMpdfServiceProvider::class,
+
 
         /*
          * Package Service Providers...
@@ -229,7 +230,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         // pdf packages
-        'PDF' => Barryvdh\DomPDF\Facade::class,
+       	'PDF' => Meneses\LaravelMpdf\Facades\LaravelMpdf::class
+
 
     ],
 

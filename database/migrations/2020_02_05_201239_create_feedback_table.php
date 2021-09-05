@@ -6,27 +6,18 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateFeedBackTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+   
     public function up()
     {
         Schema::create('feedbacks', function (Blueprint $table) {
-
             $table->id();
             $table->timestamps();
             $table->integer('note');
-            $table->string('commentaire');
+            $table->string('commentary');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
+
     public function down()
     {
         DB::statement('SET FOREIGN_KEY_CHECKS = 0');

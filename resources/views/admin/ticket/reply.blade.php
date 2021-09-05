@@ -1,5 +1,6 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
+
 <div class="container">
 <hr> <H2 class="text-muted" align="center">Ticket N° {{$ticket->id}}</H2><hr> 
     <br><br>
@@ -26,5 +27,5 @@
               <div class="alert alert-danger">{{ $message }}</div>
             @enderror
         <button id="submit" type="submit" class="btn btn-primary" style="float:right"><i class="fa fa-paper-plane topicons"></i>Envoyer</button>
-        <a href="{{ route('admin.centres.index')}}" class="btn btn-secondary" style="float:left" ><i class="fas fa-arrow-left topicons"></i>Back</a>
+        <a href="{{ route('admin.centers.index')}}" class="btn btn-secondary" style="float:left" ><i class="fa fa-arrow-left topicons"></i>Back</a>
 @endsection

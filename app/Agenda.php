@@ -8,41 +8,40 @@ use Illuminate\Database\Eloquent\Model;
 class Agenda extends Model
 {
     
-    protected $fillable = ['date_debut','date_fin'];
+    protected $fillable = ['start_date','end_date'];
 
-    public function maison()
+    public function entity()
     {
-        return $this->belongsTo('App\maison', 'maison_id', 'id')->withTimestamps();
+        return $this->belongsTo('App\Entity', 'entity_id', 'id')->withTimestamps();
     }
-    public static function convertFrom($arr){
-       $result = [];
+
+    public static function convertFrom($arr)
+    {
+        $result = [];
         if(!$arr == null)
-       {
+        {
         $agendas = base64_decode($arr);
         $agendas = json_decode($agendas);
             foreach($agendas as $a)
                 {
                     $agenda = new Agenda;
-                    $agenda->date_debut = date("Y-m-d", strtotime($a->start));
-                    $agenda->date_fin = date("Y-m-d", strtotime($a->end));
+                    $agenda->start_date = date("Y-m-d", strtotime($a->start));
+                    $agenda->end_date = date("Y-m-d", strtotime($a->end));
                     $result[]=$agenda;
                 }
         }
         return $result;
     }
-    public static function convertTo($agendas){
-  
-        $result = [];
-        foreach($agendas as $a){
-          
-            $agenda['start'] = $a->date_debut;
-            $agenda['end'] = $a->date_fin;
-            $result[]=$agenda;
-        }
 
+    public static function convertTo($agendas)
+    {
+        $result = [];
+        foreach($agendas as $a)
+        {
+            $agenda['start'] = $a->start_date;
+            $agenda['end'] = $a->end_date;
+            $result[]= $agenda;
+        }
         return $result;
     }
-
-    
-   
 }

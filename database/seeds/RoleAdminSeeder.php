@@ -5,11 +5,6 @@ use Carbon\Carbon;
 
 class RoleAdminSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
     public function run()
     {
         $AdminRoles = [

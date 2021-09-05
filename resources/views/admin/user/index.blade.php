@@ -1,21 +1,22 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
+
 <div class="container">
 <table class="table table-striped" id="userTable">
     <thead>
       <tr>
         <th></th>
-        <th>Name</th>
+        <th>Full Name</th>
         <th>Email</th>
         <th></th>
-        <th width="30%"><input type="text" class="form-control" id="searchInput" onkeyup="SearchTable('userTable','searchInput','1')" placeholder="Search user ..." title="Saisi le nom d'un user"></th>
+        <th><input type="text" class="form-control" id="searchInput" onkeyup="SearchTable('userTable','searchInput','1')" placeholder="Search user ..." title="Saisi le nom d'un user"></th>
       </tr>
     </thead>
     <tbody>
         @foreach ($users as $user)
         <tr>
-          <td><a class="btn btn-link" href="{{ route('admin.users.show',$user->id) }}"><i class="fas fa-eye"></i></a></td>
-            <td>{{ $user->name }}</td>
+          <td><a class="btn btn-link" href="{{ route('admin.users.show',$user->id) }}"><i class="fa fa-eye"></i></a></td>
+            <td>{{ $user->fullName }}</td>
             <td>{{ $user->email }}</td>
             <td>
               <td>

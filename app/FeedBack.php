@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class FeedBack extends Model
 {
     protected $fillable = [
-        'note', 'commentaire'];
+        'note', 'commentary'];
 
     
     protected $table = 'feedbacks';
 
 
-    public function reservation()
+    public function booking()
     {
-        return $this->hasOne('App\Reservation');
+        return $this->hasOne('App\Booking');
     }
 }

@@ -28,7 +28,5 @@ class Role
             return redirect('/admin/home')->with('fail','acces denied !');
         }
         return redirect('/admin/login');
-       
-      
     }
 }

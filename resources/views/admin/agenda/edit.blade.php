@@ -1,16 +1,16 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
 
 <div class="container">
-  <hr> <H2 class="text-muted" align="center">Création d'agenda</H2><hr> 
+  <hr> <H2 class="text-muted" align="center">Create new range agenda for <b>{{ $entity->label }}</b> </H2><hr> 
   <br><br>
-  <div class="form-group col-md-3 mx-auto">
+  <div class="form-group">
     <div class="input-group mb-3">
       <div>
       <input type="text"  class="form-control" name="datetimes" id="datetimes" readonly="true">
       </div>
       <div class="input-group-append">
-        <button  id="addDateBtn" class="btn btn-success"type="button" title="Crée agenda"><i class="fa fa-plus"></i></button>
+        <button  id="addDateBtn" class="btn btn-success"type="button" title="create agenda"><i class="fa fa-plus fa-lg"></i></button>
       </div>
     </div>
   </div>
@@ -18,19 +18,19 @@
 <table class="table table-striped">
     <thead>
       <tr>
-        <th>Date debut</th>
-        <th>Date fin</th>
+        <th>Start Date</th>
+        <th>End Date</th>
         <th> </th>
       </tr>
     </thead>
         <tbody  id="bodyAgendas"></tbody>
 </table>
-  <form  method="POST" action="{{ route('admin.agendas.update',$maison) }}">
-    @csrf
-  <a class="btn btn-secondary" title="Go Back !" href="{{ route('admin.maisons.index')}}" style="margin-left :-10px"><i class="fa fa-arrow-left">  <strong>Back</strong></i></a>
-        <div clas="form-group" style="float:right">
-          <a id="submit" name="submit" onclick="return confirm('Are you sure you want to update ?')" class="btn btn-primary" title="Save new changes" href="#" style="margin-right:-15px;margin-left:10px;"><i class="fa fa-floppy-o">  <strong>save</strong></i></a>
-        </div>    
+  <form  method="POST" action="{{ route('admin.agendas.update',$entity) }}">
+  @csrf
+    <div class="btn-group">
+      <a class="btn btn-secondary mr-3" title="Go Back !" href="{{ route('admin.entities.index')}}"><i class="fa fa-arrow-left">  <strong>Back</strong></i></a>
+      <a id="submit" name="submit" onclick="return confirm('Are you sure you want to update ?')" class="btn btn-primary" title="Save new changes" href="#"><i class="fa fa-floppy-o">  <strong>save</strong></i></a>
+    </div>
   </form>
 </div>
 <script>
@@ -65,21 +65,20 @@
   
 
   function refreshAgendas(start, end) {
-    if(!start && !end){
+    if(!start && !end) {
       alert('selectionner la date');
-    }else{
-      //$('#reportrange').append(start.format('YYYY-MM-DD') + ' - ' + end.format('YYYY-MM-DD')+'<br/>');
+    }
+    else{
       agendas.push({'start':start.format('YYYY-MM-DD'), 'end':end.format('YYYY-MM-DD') });
       refreshDisplayAgendas();
     }
-    //alert(JSON.stringify(agendas));
     isBtnAddDateActive= false;
-    //$('#addDateBtn').prop('disabled', true);
   }
   $("#addDateBtn").click(function(){
-    if(isBtnAddDateActive){
+    if(isBtnAddDateActive) {
       refreshAgendas(startDate, endDate);
-    }else{
+    }
+    else {
       alert('Selectionner une periode');
     }
   });
@@ -113,7 +112,6 @@ $(function() {
       startDate=start;
       endDate=end;
       isBtnAddDateActive=true;
-      //$('#addDateBtn').prop('disabled', false);
     });
 });
 

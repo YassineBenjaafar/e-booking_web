@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Ticket extends Model
 {
     private $client_id;
-    private $sujet;
+    private $subject;
     private $message;
 
-    protected $fillable = ['client_id','sujet','message'];
+    protected $fillable = ['client_id','subject','message'];
 
     public function client(){
         return $this->belongsTo('App\Client');

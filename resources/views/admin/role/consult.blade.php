@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
 <div class="container">
     <hr> <H2 class="text-muted" align="center">Visualisation</H2><hr> 

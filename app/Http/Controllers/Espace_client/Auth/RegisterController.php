@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
-use App\Salarie;
+use App\Employee;
 use App\Client;
 
 class RegisterController extends Controller
@@ -68,7 +68,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = Client::create([
-            'name' => $data['name'],
+            'fullName' => $data['fullName'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -81,24 +81,24 @@ class RegisterController extends Controller
     }
     public function register(Request $request) 
     {
-         // for salarie
+         // for Employee
          $this->validator($request->all())->validate();
-         $salarieFound = Salarie::firstWhere('matricule',$request->matricule);
-         if($salarieFound){
-            if(!$salarieFound->client_id){
-                $request['name']= $salarieFound->nom;
+         $employeeFound = Employee::firstWhere('ecode',$request->ecode);
+         if($employeeFound){
+            if(!$employeeFound->client_id){
+                $request['fullName'] = $employeeFound->first_name . " " . $employeeFound->last_name;
                 event(new Registered($user = $this->create($request->all())));
                 $this->guard("client")->login($user);
-                $salarieFound->client()->associate($user);
-                $salarieFound->points = $salarieFound->getPoints();
-                $salarieFound->update();
+                $employeeFound->client()->associate($user);
+                $employeeFound->points = $employeeFound->getPoints();
+                $employeeFound->update();
                 return redirect('/');
            }else
            {
-                return redirect('register')->with('fail','Matricule du salarié déja associer a un compte!.');
+                return redirect('register')->with('fail','Employee Code is already associated to an account!');
            }
         }
-            return redirect('register')->with('fail','Matricule du salarié non existant.');
+            return redirect('register')->with('fail','eCode doesnt match any employee!');
          
 
     }

@@ -1,24 +1,25 @@
-@extends('layouts.app')
+@extends('layouts.admin_layout')
 @section('content')
+
 <div class="container">
-    <hr> <H2 class="text-muted" align="center">Visualisation</H2><hr> 
+    <hr> <H2 class="text-muted" align="center">Visualisation user <b>{{ $user->fullName}}</b></H2><hr> 
     <br><br>
 @csrf                            
     <table class="table table-striped">
     <thead>
         <tr>
-            <th width="5%">ID</th>
-            <th width="15%">Name</th>
-            <th width="20%">Email</th>
-            <th width="20%">Email verified at</th>
-            <th width="20%">Created at</th>
-            <th width="20%">Updated at</th>
+            <th>ID</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Email verified at</th>
+            <th>Created at</th>
+            <th>Updated at</th>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>{{ $user->id}}</td>
-            <td>{{ $user->name}}</td>
+            <td>{{ $user->fullName}}</td>
             <td>{{ $user->email}}</td>
             <td>{{ $user->email_verified_at}}</td>
             <td>{{ $user->created_at}}</td>
@@ -26,6 +27,6 @@
         </tr>
     </tbody>
     </table>
-    <a href="{{ route('admin.users.index')}}" class="btn btn-secondary" style="float:left" ><i class="fas fa-arrow-left topicons"></i>Back</a>
+    <a href="{{ route('admin.users.index')}}" class="btn btn-secondary" style="float:left" ><i class="fa fa-arrow-left topicons"></i>Back</a>
 </div>
 @endsection  

@@ -54,7 +54,7 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'fullName' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:admins'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -69,7 +69,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         $user = Admin::create([
-            'name' => $data['name'],
+            'fullName' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
@@ -84,12 +84,12 @@ class RegisterController extends Controller
     {
             $this->validator($request->all())->validate();
             event(new Registered($user = $this->create($request->all())));
-             //attach role "user" to User 
             $user->roles()->attach(3);
             $user->update();
             $this->guard()->login($user);
             return redirect()->route('admin.');
     }
+    
     protected function guard(){
         return Auth::guard('admin');
     }

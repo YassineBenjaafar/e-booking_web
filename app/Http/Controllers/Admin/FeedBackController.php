@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class FeedBackController extends Controller
 {
     Public function index(){
-        $name='FeedBack';
+        $name = 'FeedBack';
+        
         return view('admin/FeedBack',['name'=>$name]);
     }
 }
